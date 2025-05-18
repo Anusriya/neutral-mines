@@ -1,6 +1,9 @@
 import { Inter as FontSans } from "next/font/google"
 import "./globals.css";
 import { cn } from "@/lib/utils"
+import { ThemeProvider } from "@/components/ThemeProvider";
+import Navbar from "./_components/Navbar";
+import Navbar2 from "./_components/Navbar2";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -14,12 +17,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}
-      >{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable
+          )}
+        >
+          {/* <Navbar /> */}
+          <Navbar />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
